@@ -1,0 +1,109 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class SessioUsuari
+{
+    private: 
+    string nomUsuari; //Nom del compte
+    int tempsLimitSegons; //Segons màxims de durada, sempre major a 0
+    bool activa; //Sessió oberta o tancada
+
+    public: 
+
+SessioUsuari () 
+{
+    nomUsuari = "convidat";
+    tempsLimitSegons = 300;
+    activa = true
+}
+
+explicit SessioUsuari (string nomUsuari)
+{
+    nomUsuari = nom;
+    tempsLimitSegons = 600;
+    activa = true;
+}
+
+SessioUsuari (string nomUsuari, int temps)
+{
+    nomUsuari = nom;
+    activa = true;
+
+    if (temps <= 0)
+    {
+        tempsLimitSegons = 60;
+    }
+    else 
+    {
+        tempsLimitSegons = temps;
+    }
+}
+
+SessioUsuari(string nom, int temps) {
+        nomUsuari = nom;
+        activa = true;
+
+        // Comprobamos la regla (invariant): si el tiempo es 0 o negativo, ponemos 60s
+        if (temps <= 0) {
+            tempsLlimitSegons = 60;
+        } else {
+            tempsLlimitSegons = temps;
+        }
+    }
+
+string getNomUsuari() const 
+{
+    return nomUsuari;
+}
+
+bool isActiva() const
+{
+    return activa;
+}
+
+void ampliarTemps(int segons)
+{
+    if (segons > 0)
+    {
+        tempsLimitSegons = tempsLimitSegons + segons;
+    }
+
+}
+
+bool tancarSessio()
+{
+    if (activa == true) {
+    tancarSessio(); 
+    cout << "[AUDITORIA] La sessio de '" << nomUsuari 
+    << "' s'ha tancat automaticament en sortir d'ambit.\n";
+
+}
+
+~SessioUsuari() {
+        if (activa == true) {
+            tancarSessio(); // Llama al método privado para poner activa = false
+            cout << "[AUDITORIA] La sessio de '" << nomUsuari 
+                 << "' s'ha tancat automaticament en sortir d'ambit.\n";
+        }
+        
+}
+
+
+int main() 
+{
+    cout << " INICI DEL PROGRAMA ";
+
+    {
+        SessioUsuari sessio1("Aina", -10);
+
+        cout << "Usuari creat: " << sessio1.getNomUsuari() << "\n";
+        
+        sessio1.ampliarTemps(120); 
+        
+        cout << "Llegamos al final del bloque de codigo...\n";
+    } 
+
+
+}
+
